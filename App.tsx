@@ -1,12 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import tw from "twrnc";
 
 import Header from "./components/Header";
 
 export default function App() {
   const [users, setUsers] = useState([]);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text>{item.name}</Text>
+    </View>
+  );
 
   useEffect(() => {
     const getUser = async () => {
@@ -20,9 +26,19 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header title="ユーザー一覧" />
-      {users.map((user) => (
-        <Text key={user.id}>{user.name}</Text>
-      ))}
+      <FlatList
+        data={users}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{
+              backgroundColor: "lightgray",
+              height: 1,
+            }}
+          ></View>
+        )}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -31,5 +47,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  item: {
+    padding: 40,
   },
 });
