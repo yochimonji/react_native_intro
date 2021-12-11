@@ -1,6 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Alert,
+  Pressable,
+  Image,
+} from "react-native";
 import tw from "twrnc";
 
 import Header from "./components/Header";
@@ -9,9 +17,19 @@ export default function App() {
   const [users, setUsers] = useState([]);
 
   const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text>{item.name}</Text>
-    </View>
+    <Pressable
+      onPress={() => {
+        Alert.alert(item.name);
+      }}
+    >
+      <View style={styles.item}>
+        <Image
+          source={{ uri: "https://i.pravatar.cc/150" }}
+          style={styles.avatar}
+        />
+        <Text>{item.name}</Text>
+      </View>
+    </Pressable>
   );
 
   useEffect(() => {
@@ -49,6 +67,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
+    flexDirection: "row",
+    alignItems: "center",
     padding: 40,
+    backgroundColor: "#eeeeee",
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    marginRight: 8,
   },
 });
