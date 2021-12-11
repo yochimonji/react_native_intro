@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
 type HeaderType = {
   title: string;
@@ -8,7 +9,10 @@ type HeaderType = {
 const Header = ({ title }: HeaderType) => {
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>{title}</Text>
+      <View style={styles.title}>
+        <Feather name="users" size={24} color="black" />
+        <Text style={styles.text}>{title}</Text>
+      </View>
     </View>
   );
 };
@@ -18,11 +22,15 @@ const styles = StyleSheet.create({
     height: 90,
     backgroundColor: "lightblue",
   },
-  text: {
+  title: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 50,
-    color: "white",
+  },
+  text: {
     fontSize: 20,
-    textAlign: "center",
+    marginLeft: 8,
   },
 });
 
