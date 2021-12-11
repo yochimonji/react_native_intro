@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import tw from "twrnc";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>
+      <Text style={tw`text-red-500 font-bold`}>
         Open up App.tsx to start working on your app!
       </Text>
       <StatusBar style="auto" />
