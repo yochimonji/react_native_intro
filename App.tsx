@@ -8,10 +8,12 @@ import {
   Alert,
   Pressable,
   Image,
+  ScrollView,
 } from "react-native";
 import tw from "twrnc";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -44,6 +46,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header title="ユーザー一覧" />
+
       <FlatList
         data={users}
         renderItem={renderItem}
@@ -57,7 +60,17 @@ export default function App() {
           ></View>
         )}
       />
-      <StatusBar style="auto" />
+
+      {/* FlatListを使わないパターン */}
+      {/* <ScrollView>
+        {users.map((user) => (
+          <Text key={user.id} style={styles.item}>
+            {user.name}
+          </Text>
+        ))}
+      </ScrollView> */}
+
+      <Footer />
     </View>
   );
 }
