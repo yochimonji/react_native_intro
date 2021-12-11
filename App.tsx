@@ -3,26 +3,19 @@ import React from "react";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import tw from "twrnc";
 
+import Header from "./components/Header";
+
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={tw`text-red-500 font-bold`}>
-        Open up App.tsx to start working on your app!
-      </Text>
+    <View style={styles.container}>
+      <Header title="ユーザー一覧" />
       <StatusBar style="auto" />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "red",
-    fontSize: 20,
   },
 });
