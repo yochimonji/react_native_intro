@@ -1,23 +1,21 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Alert,
-  Pressable,
-  Image,
-  ScrollView,
-} from "react-native";
-import tw from "twrnc";
+import { StyleSheet, View, FlatList } from "react-native";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ListUser from "./components/ListUser";
+import AddUser from "./components/AddUser";
 
 export default function App() {
   const [users, setUsers] = useState([]);
+
+  const addUser = (name: string) => {
+    setUsers((prevUsers) => {
+      return [{ id: uuidv4(), name }, ...prevUsers];
+    });
+  };
 
   const deleteUser = (id: Number) => {
     setUsers((prevUsers) => {
@@ -62,6 +60,8 @@ export default function App() {
           </Text>
         ))}
       </ScrollView> */}
+
+      <AddUser addUser={addUser} />
 
       <Footer />
     </View>
