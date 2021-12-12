@@ -14,25 +14,16 @@ import tw from "twrnc";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ListUser from "./components/ListUser";
 
 export default function App() {
   const [users, setUsers] = useState([]);
 
-  const renderItem = ({ item }) => (
-    <Pressable
-      onPress={() => {
-        Alert.alert(item.name);
-      }}
-    >
-      <View style={styles.item}>
-        <Image
-          source={{ uri: "https://i.pravatar.cc/150" }}
-          style={styles.avatar}
-        />
-        <Text>{item.name}</Text>
-      </View>
-    </Pressable>
-  );
+  const deleteUser = (id: Number) => {
+    setUsers((prevUsers) => {
+      return prevUsers.filter((prevUser) => prevUser.id !== id);
+    });
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -49,7 +40,9 @@ export default function App() {
 
       <FlatList
         data={users}
-        renderItem={renderItem}
+        renderItem={({ item }) => (
+          <ListUser item={item} deleteUser={deleteUser} />
+        )}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => (
           <View
@@ -78,17 +71,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  item: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 40,
-    backgroundColor: "#eeeeee",
-  },
-  avatar: {
-    height: 50,
-    width: 50,
-    borderRadius: 30,
-    marginRight: 8,
   },
 });
